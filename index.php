@@ -1,5 +1,16 @@
 <?php
 include("konek.php");
+session_start();
+if(strcasecmp(date("l"),"Sunday") == 0)
+{
+    $sql = mysqli_query($con, "SELECT * FROM data2 ");
+    $row = mysqli_fetch_assoc($sql);
+    $star= $row['Star'];
+    if($star>=10)
+    {
+       mysqli_query($con, "UPDATE data2 SET Star=0");
+   }
+}
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +43,8 @@ include("konek.php");
           {
               $sql = mysqli_query($con, "SELECT * FROM data2 WHERE username='$email'");
               $row = mysqli_fetch_assoc($sql);
-              $verif = password_hash($row['NPM'],PASSWORD_DEFAULT);
-              header("Location: beranda.php?hrc=".$verif);
+              $_SESSION['npm'] = $row['NPM'];
+              header("location: beranda.php");
           }else{
               echo '<div class="alert alert-warning"> Password dan Username anda tidak sesuai</div>';
           }
@@ -66,6 +77,7 @@ include("konek.php");
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ksp.js"></script>
     <script src="js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>

@@ -1,5 +1,7 @@
 <?php
 include("konek.php");
+session_start();
+if($_SESSION['npm']){
  ?>
  <!DOCTYPE html>
  <html lang="en">
@@ -26,20 +28,23 @@ include("konek.php");
        </button>
        <a class="navbar-brand" href="#">Dashboard</a>
        <?php
-       $hrc = $_GET['hrc'];
        $hash = mysqli_query($con, "SELECT * FROM data2");
        $row = mysqli_fetch_assoc($hash);
-       if(password_verify($row['NPM'],$hrc))
+       $NPM = $_SESSION['npm'];
+       echo 'npm anda'.$NPM;
+       $sql = mysqli_query($con, "SELECT * FROM data2 WHERE NPM='$NPM'");
+       $row = mysqli_fetch_assoc($sql);
+       $Uname = $row['Username'];
+       $nama = $row['Nama'];
+       $poin = $row['Poin'];
+       $star = $row['Star'];
+       $stat = $row['status'];
+       if(strcasecmp(date("l"),"Monday") == 0)
        {
-           $NPM = $row['NPM'];
-           echo 'npm anda'.$NPM;
-           $sql = mysqli_query($con, "SELECT * FROM data2 WHERE NPM='$NPM'");
-           $row = mysqli_fetch_assoc($sql);
-           $Uname = $row['Username'];
-           $nama = $row['Nama'];
-           $poin = $row['Poin'];
-           $star = $row['Star'];
-           $stat = $row['status'];
+          if($star==0)
+          {
+              $masukkan = mysqli_query($con, "UPDATE data2 SET Star=13 WHERE NPM=$NPM");
+          }
        }
        ?>
 
@@ -49,7 +54,7 @@ include("konek.php");
              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
            </li>
            <li class="nav-item">
-             <a class="nav-link" href="#">log out</a>
+             <a class="nav-link" href="logout.php">log out</a>
            </li>
          </ul>
          </div>
@@ -139,3 +144,8 @@ include("konek.php");
      <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
    </body>
  </html>
+ <?php
+   }else{
+     header("location: index.php");
+   }
+ ?>
