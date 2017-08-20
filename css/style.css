@@ -1,0 +1,7 @@
+.star{
+    position: relative;
+    font-size: 100px;
+    color: green;
+    z-index: 50;
+    background-image: url("data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=");
+}

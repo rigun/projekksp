@@ -19,6 +19,7 @@ if($_SESSION['npm']){
 
      <!-- Custom styles for this template -->
      <link href="css/dashboard.css" rel="stylesheet">
+     <link href="css/style.css" rel="stylesheet">
    </head>
 
    <body>
@@ -26,7 +27,7 @@ if($_SESSION['npm']){
        <button class="navbar-toggler navbar-toggler-right hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
        </button>
-       <a class="navbar-brand" href="#">Dashboard</a>
+       <a class="navbar-brand" href="#"><img src="image/logo.png" style="width: 150px;"></a>
        <?php
        $hash = mysqli_query($con, "SELECT * FROM data2");
        $row = mysqli_fetch_assoc($hash);
@@ -47,7 +48,6 @@ if($_SESSION['npm']){
           }
        }
        ?>
-
        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
          <ul class="navbar-nav mr-auto">
            <li class="nav-item active">
@@ -85,13 +85,12 @@ if($_SESSION['npm']){
            <h1>KSP (Kelompok Studi Pemrograman)</h1>
 
            <section class="row text-center placeholders">
+
              <div class="col-6 col-sm-3 placeholder">
-               <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
-               <h4>POIN</h4>
-             </div>
-             <div class="col-6 col-sm-3 placeholder">
-               <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid Star" alt="Generic placeholder thumbnail">
-               <h4>BINTANG</h4>
+              <div class="star img-fluid rounded-circle">
+               <?php echo $row['Star']; ?></div>
+               <br/>
+               <h4>Bintang Anda</h4>
              </div>
             </section>
 

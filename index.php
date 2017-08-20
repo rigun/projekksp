@@ -28,49 +28,44 @@ if(strcasecmp(date("l"),"Sunday") == 0)
 
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
   </head>
 
   <body>
-
-      <?php
-      if(isset($_GET['kirim']))
-      {
-          $email = $_GET['email'];
-          $pass = $_GET['pwd'];
-          $hash = mysqli_query($con, "SELECT * FROM data2 WHERE username='$email'");
-          $row = mysqli_fetch_assoc($hash);
-          if(password_verify($pass,$row['Password']))
-          {
-              $sql = mysqli_query($con, "SELECT * FROM data2 WHERE username='$email'");
-              $row = mysqli_fetch_assoc($sql);
-              $_SESSION['npm'] = $row['NPM'];
-              header("location: beranda.php");
-          }else{
-              echo '<div class="alert alert-warning"> Password dan Username anda tidak sesuai</div>';
-          }
-
-        }
-       ?>
+      <br/>
+      <br/>
+     <center><img src="image/logo.png" style="width: 250px;"> <h2 style="color: blue;">Kelompok Studi Pemrograman</h2></center>
     <div class="container">
 
       <form action="" method="get" class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
         <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="pwd" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
+
         <button class="btn btn-lg btn-primary btn-block" name="kirim" type="submit">Sign in</button>
 
       </form>
-
-      <center>belum punya akun ? daftar <a href="daftar.php">disini</a></center>
-
     </div> <!-- /container -->
+    <?php
+    if(isset($_GET['kirim']))
+    {
+        $email = $_GET['email'];
+        $pass = $_GET['pwd'];
+        $hash = mysqli_query($con, "SELECT * FROM data2 WHERE username='$email'");
+        $row = mysqli_fetch_assoc($hash);
+        if(password_verify($pass,$row['Password']))
+        {
+            $sql = mysqli_query($con, "SELECT * FROM data2 WHERE username='$email'");
+            $row = mysqli_fetch_assoc($sql);
+            $_SESSION['npm'] = $row['NPM'];
+            header("location: beranda.php");
+        }else{
+            echo '<div class="alert alert-warning"> Password dan Username anda tidak sesuai</div>';
+        }
+
+      }
+     ?>
 
 
     <!-- Bootstrap core JavaScript
